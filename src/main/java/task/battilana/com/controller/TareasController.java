@@ -55,4 +55,10 @@ public class TareasController {
     public ResponseEntity<Integer> contadorTerminados(){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorTerminados());
     }
+
+    @PutMapping("/actualizar-estado/{idTarea}")
+    public ResponseEntity<Void> actualizarEstado(@PathVariable Long idTarea){
+        this.tareasService.actualizarEstado(idTarea);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

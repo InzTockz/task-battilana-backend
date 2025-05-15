@@ -14,4 +14,5 @@ public interface TareasService {
     void eliminar (Long id);
     Integer contadorPendientes();
     Integer contadorTerminados();
+    void actualizarEstado (Long id);
 }

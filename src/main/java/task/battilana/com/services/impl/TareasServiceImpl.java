@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import task.battilana.com.dto.request.TareaRequest;
 import task.battilana.com.dto.response.TareaResponse;
+import task.battilana.com.entity.EstadoEnum;
 import task.battilana.com.entity.TareasEntity;
 import task.battilana.com.entity.UsuariosEntity;
 import task.battilana.com.mapper.TareaMapper;
@@ -86,5 +87,14 @@ public class TareasServiceImpl implements TareasService {
     @Override
     public Integer contadorTerminados() {
         return this.tareasRepository.countByEstadoEnumTerminado();
+    }
+
+    @Override
+    public void actualizarEstado(Long id) {
+        if(id!=null){
+            TareasEntity tareasEntity = this.tareasRepository.findById(id).get();
+            tareasEntity.setEstadoEnum(EstadoEnum.TERMINADO);
+            this.tareasRepository.save(tareasEntity);
+        }
     }
 }
