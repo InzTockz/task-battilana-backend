@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import task.battilana.com.dto.request.TareaRequest;
 import task.battilana.com.dto.response.TareaResponse;
+import task.battilana.com.entity.TareasEntity;
 import task.battilana.com.services.TareasService;
 
 import java.util.List;
@@ -60,5 +61,15 @@ public class TareasController {
     public ResponseEntity<Void> actualizarEstado(@PathVariable Long idTarea){
         this.tareasService.actualizarEstado(idTarea);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/listado-pendientes")
+    public ResponseEntity<List<TareaResponse>> listadoPendientes(){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoPorPendiente());
+    }
+
+    @GetMapping("/listado-terminado")
+    public ResponseEntity<List<TareaResponse>> listadoTerminados(){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoPorTerminado());
     }
 }

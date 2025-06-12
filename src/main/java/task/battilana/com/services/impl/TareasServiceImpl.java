@@ -97,4 +97,14 @@ public class TareasServiceImpl implements TareasService {
             this.tareasRepository.save(tareasEntity);
         }
     }
+
+    @Override
+    public List<TareaResponse> listadoPorPendiente() {
+        return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoTareasPorPendiente());
+    }
+
+    @Override
+    public List<TareaResponse> listadoPorTerminado() {
+        return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoTareasPorTerminado());
+    }
 }
