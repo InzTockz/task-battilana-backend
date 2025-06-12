@@ -19,6 +19,9 @@ public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
             "WHERE te.estadoEnum = 'TERMINADO'")
     int countByEstadoEnumTerminado();
 
+    @Query("SELECT count(T) FROM TareasEntity T ")
+    int countByEstadoEnumTotales();
+
     @Query("SELECT T FROM TareasEntity T " +
             "WHERE T.estadoEnum = 'PENDIENTE' " +
             "ORDER BY T.fechaCreacion desc")

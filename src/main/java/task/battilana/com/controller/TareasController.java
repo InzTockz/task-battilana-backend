@@ -57,6 +57,11 @@ public class TareasController {
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorTerminados());
     }
 
+    @GetMapping("/contador-totales")
+    public ResponseEntity<Integer> contadorTotales(){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorTotales());
+    }
+
     @PutMapping("/actualizar-estado/{idTarea}")
     public ResponseEntity<Void> actualizarEstado(@PathVariable Long idTarea){
         this.tareasService.actualizarEstado(idTarea);

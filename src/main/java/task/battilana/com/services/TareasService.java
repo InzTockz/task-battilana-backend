@@ -17,6 +17,7 @@ public interface TareasService {
     // FUNCIONES EXTRAS
     Integer contadorPendientes();
     Integer contadorTerminados();
+    Integer contadorTotales();
     void actualizarEstado (Long id);
 
     //LISTADO POR TIPO

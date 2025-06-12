@@ -90,6 +90,11 @@ public class TareasServiceImpl implements TareasService {
     }
 
     @Override
+    public Integer contadorTotales() {
+        return this.tareasRepository.countByEstadoEnumTotales();
+    }
+
+    @Override
     public void actualizarEstado(Long id) {
         if(id!=null){
             TareasEntity tareasEntity = this.tareasRepository.findById(id).get();
