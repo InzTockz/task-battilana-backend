@@ -34,10 +34,9 @@ public class ScheduledMail {
         this.templateEngine = templateEngine;
     }
 
-    //@Scheduled(cron = "0 */5 * * * *")
+    @Scheduled(cron = "0 0 7 * * MON-FRI")
     public void enviarMail() {
         try{
-
             List<UsuariosEntity> usuariosEntity = this.usuarioRepository.findAll();
 
             if(!usuariosEntity.isEmpty()){
@@ -48,24 +47,22 @@ public class ScheduledMail {
                         MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
                         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
-                        helper.setFrom("gestorarticulos@battilana.biz");
-                        helper.setTo("fhurtado@battilana.biz");
-                        helper.setSubject("Test");
+                        helper.setFrom("taskbattilana@battilana.biz");
+                        helper.setTo(usuarios.getCorreo());
+                        helper.setSubject("Recordatorio: Tareas pendientes por completar");
 
                         Context context = new Context();
+                        context.setVariable("nombre", usuarios.getNombres());
                         context.setVariable("listaTareas", tareasEntity);
-                        String html = this.templateEngine.process("task-recordatory", context);
+                        String html = this.templateEngine.process("mail-automatic", context);
 
-                        helper.setText(html);
-
+                        helper.setText(html, true);
 
                         this.javaMailSender.send(mimeMessage);
-
                         logger.info("Correo enviado: {}", new Date());
                     }
                 }
             }
-
         }catch (MessagingException ex){
             System.out.println("Error: " + ex);
         }

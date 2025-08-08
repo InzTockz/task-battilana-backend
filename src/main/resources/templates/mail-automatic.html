@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mail task automatic</title>
+    <style>
+        body{
+            padding: 5px;
+        }
+
+        .container-main{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            border: 2px ;
+            gap: 15px;
+        }
+
+        .container-data{
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            padding: 5px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid black;
+        }
+        .parrafo{
+            margin-left: 10px;
+            font-size: 17px;
+        }
+        .logo{
+            width: 40px;
+            height: 40px;
+        }
+        .div-content{
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<p class="parrafo">
+    Hola <span th:text="${nombre}"></span>,
+    <br>
+    <br>
+    Amable recordatorio de las tareas pendientes que mantiene a su cargo.
+</p>
+<div class="container-main">
+    <div class="container-data" th:each="tareas : ${listaTareas}">
+        <div class="div-content"><img class="logo" src="https://i.ibb.co/LdyK70Mz/pending.png"></div>
+        <div class="div-content"><p class="parrafo" th:text="${tareas.getNombreTarea()}">Texto de prueba</p></div>
+    </div>
+</div>
+</body>
+</html>

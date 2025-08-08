@@ -40,6 +40,6 @@ public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
     @Query("SELECT T " +
             "FROM TareasEntity T " +
             "INNER JOIN UsuariosEntity U ON U.idUsuarios = T.usuariosEntity.idUsuarios " +
-            "WHERE T.usuariosEntity.idUsuarios =:idUsuario")
+            "WHERE T.usuariosEntity.idUsuarios =:idUsuario AND T.estadoEnum='PENDIENTE'")
     List<TareasEntity> listadoTareasPorUsuario(@Param("idUsuario") Long idUsuario);
 }
