@@ -2,6 +2,7 @@ package task.battilana.com.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import task.battilana.com.entity.TareasEntity;
 
 import java.util.List;
@@ -35,4 +36,10 @@ public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
     @Query("SELECT T FROM TareasEntity T " +
             "ORDER BY T.fechaCreacion desc")
     List<TareasEntity> findAll();
+
+    @Query("SELECT T " +
+            "FROM TareasEntity T " +
+            "INNER JOIN UsuariosEntity U ON U.idUsuarios = T.usuariosEntity.idUsuarios " +
+            "WHERE T.usuariosEntity.idUsuarios =:idUsuario")
+    List<TareasEntity> listadoTareasPorUsuario(@Param("idUsuario") Long idUsuario);
 }
