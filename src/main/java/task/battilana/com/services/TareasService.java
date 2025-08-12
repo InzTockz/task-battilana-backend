@@ -23,4 +23,9 @@ public interface TareasService {
     //LISTADO POR TIPO
     List<TareaResponse> listadoPorPendiente();
     List<TareaResponse> listadoPorTerminado();
+
+    //LISTADO POR USUARIOS
+    List<TareaResponse> listadoTareasPendientePorUsuario(Long idUsuario);
+    List<TareaResponse> listadoTareasTerminadoPorUsuario(Long idUsuario);
+    List<TareaResponse> listadoTareasTotalPorUsuario(Long idUsuario);
 }

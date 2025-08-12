@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
 
-
+    //CONTADOR DE TAREAS POR ESTADO
     @Query("SELECT count(te) " +
             "FROM TareasEntity te " +
             "WHERE te.estadoEnum = 'PENDIENTE'")
@@ -23,6 +23,7 @@ public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
     @Query("SELECT count(T) FROM TareasEntity T ")
     int countByEstadoEnumTotales();
 
+    //LISTADO DE TAREAS POR ESTADO
     @Query("SELECT T FROM TareasEntity T " +
             "WHERE T.estadoEnum = 'PENDIENTE' " +
             "ORDER BY T.fechaCreacion desc")
@@ -37,9 +38,27 @@ public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
             "ORDER BY T.fechaCreacion desc")
     List<TareasEntity> findAll();
 
+    //PARA ENVIOS DE CORREO DE MANERA AUTOMATICA
     @Query("SELECT T " +
             "FROM TareasEntity T " +
             "INNER JOIN UsuariosEntity U ON U.idUsuarios = T.usuariosEntity.idUsuarios " +
             "WHERE T.usuariosEntity.idUsuarios =:idUsuario AND T.estadoEnum='PENDIENTE'")
     List<TareasEntity> listadoTareasPorUsuario(@Param("idUsuario") Long idUsuario);
+
+    //LISTADO DE TAREAS POR USUARIO
+    @Query("SELECT TP " +
+            "FROM TareasEntity TP " +
+            "WHERE TP.usuariosEntity.idUsuarios = :idUsuario AND TP.estadoEnum = 'PENDIENTE'")
+    List<TareasEntity> listadoTareasPendientesPorUsuario(@Param("idUsuario") Long idUsuario);
+
+    @Query("SELECT TP " +
+            "FROM TareasEntity TP " +
+            "WHERE TP.usuariosEntity.idUsuarios = :idUsuario AND TP.estadoEnum = 'TERMINADO'")
+    List<TareasEntity> listadoTareasCompletadoPorUsuario(@Param("idUsuario") Long idUsuario);
+
+    @Query("SELECT TP " +
+            "FROM TareasEntity TP " +
+            "WHERE TP.usuariosEntity.idUsuarios = :idUsuario")
+    List<TareasEntity> listadoTareasTotalessPorUsuario(@Param("idUsuario") Long idUsuario);
+
 }

@@ -112,4 +112,19 @@ public class TareasServiceImpl implements TareasService {
     public List<TareaResponse> listadoPorTerminado() {
         return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoTareasPorTerminado());
     }
+
+    @Override
+    public List<TareaResponse> listadoTareasPendientePorUsuario(Long idUsuario) {
+        return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoTareasPendientesPorUsuario(idUsuario));
+    }
+
+    @Override
+    public List<TareaResponse> listadoTareasTerminadoPorUsuario(Long idUsuario) {
+        return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoTareasCompletadoPorUsuario(idUsuario));
+    }
+
+    @Override
+    public List<TareaResponse> listadoTareasTotalPorUsuario(Long idUsuario) {
+        return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoTareasTotalessPorUsuario(idUsuario));
+    }
 }

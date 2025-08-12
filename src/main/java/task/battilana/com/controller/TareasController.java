@@ -77,4 +77,19 @@ public class TareasController {
     public ResponseEntity<List<TareaResponse>> listadoTerminados(){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoPorTerminado());
     }
+
+    @GetMapping("/listado-pendiente/usuario/{idUsuario}")
+    public ResponseEntity<List<TareaResponse>> listadoPendientePorUsuario(@PathVariable Long idUsuario){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoTareasPendientePorUsuario(idUsuario));
+    }
+
+    @GetMapping("/listado-terminado/usuario/{idUsuario}")
+    public ResponseEntity<List<TareaResponse>> listadoTerminadoPorUsuario(@PathVariable Long idUsuario){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoTareasTerminadoPorUsuario(idUsuario));
+    }
+
+    @GetMapping("/listado-total/usuario/{idUsuario}")
+    public ResponseEntity<List<TareaResponse>> listadoTotalPorUsuario(@PathVariable Long idUsuario){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoTareasTotalPorUsuario(idUsuario));
+    }
 }
