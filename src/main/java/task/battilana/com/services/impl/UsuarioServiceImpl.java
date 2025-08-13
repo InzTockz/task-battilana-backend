@@ -1,7 +1,7 @@
 package task.battilana.com.services.impl;
 
 import org.springframework.stereotype.Service;
-import task.battilana.com.dto.UsuarioDto;
+import task.battilana.com.dto.response.UsuarioResponse;
 import task.battilana.com.mapper.UsuarioMapper;
 import task.battilana.com.repository.UsuarioRepository;
 import task.battilana.com.services.UsuarioService;
@@ -20,12 +20,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public List<UsuarioDto> listado() {
+    public List<UsuarioResponse> listado() {
         return this.usuarioMapper.listadoUsuarioMapper(this.usuarioRepository.findAll());
     }
 
     @Override
-    public UsuarioDto registrar(UsuarioDto usuarioDto) {
-        return this.usuarioMapper.usuarioDtoMapper(this.usuarioRepository.save(this.usuarioMapper.usuariosEntityMapper(usuarioDto)));
+    public UsuarioResponse registrar(UsuarioResponse usuarioResponse) {
+        return this.usuarioMapper.usuarioDtoMapper(this.usuarioRepository.save(this.usuarioMapper.usuariosEntityMapper(usuarioResponse)));
     }
 }

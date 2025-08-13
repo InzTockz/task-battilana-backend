@@ -61,4 +61,20 @@ public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
             "WHERE TP.usuariosEntity.idUsuarios = :idUsuario")
     List<TareasEntity> listadoTareasTotalessPorUsuario(@Param("idUsuario") Long idUsuario);
 
+    //CONTADOR DE TAREAS POR USUARIO
+    @Query("SELECT COUNT(T.idTarea) " +
+            "FROM TareasEntity T " +
+            "WHERE T.usuariosEntity.idUsuarios=:idUsuario AND T.estadoEnum='PENDIENTE'")
+    Integer contadorPendientesPorUsuario(@Param("idUsuario") Long idUsuario);
+
+    @Query("SELECT COUNT(T.idTarea) " +
+            "FROM TareasEntity T " +
+            "WHERE T.usuariosEntity.idUsuarios=:idUsuario AND T.estadoEnum='TERMINADO'")
+    Integer contadorCompletadoPorUsuario(@Param("idUsuario") Long idUsuario);
+
+    @Query("SELECT COUNT(T.idTarea) " +
+            "FROM TareasEntity T " +
+            "WHERE T.usuariosEntity.idUsuarios=:idUsuario")
+    Integer contadorTotalPorUsuario(@Param("idUsuario") Long idUsuario);
+
 }

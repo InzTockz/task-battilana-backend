@@ -127,4 +127,19 @@ public class TareasServiceImpl implements TareasService {
     public List<TareaResponse> listadoTareasTotalPorUsuario(Long idUsuario) {
         return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoTareasTotalessPorUsuario(idUsuario));
     }
+
+    @Override
+    public Integer contadorPendientesPorUsuario(Long idUsuario) {
+        return this.tareasRepository.contadorPendientesPorUsuario(idUsuario);
+    }
+
+    @Override
+    public Integer contadorCompletadoPorUsuario(Long idUsuario) {
+        return this.tareasRepository.contadorCompletadoPorUsuario(idUsuario);
+    }
+
+    @Override
+    public Integer contadorTotalPorUsuario(Long idUsuario) {
+        return this.tareasRepository.contadorTotalPorUsuario(idUsuario);
+    }
 }

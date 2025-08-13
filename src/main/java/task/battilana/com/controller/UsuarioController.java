@@ -3,8 +3,7 @@ package task.battilana.com.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import task.battilana.com.dto.UsuarioDto;
-import task.battilana.com.services.TareasService;
+import task.battilana.com.dto.response.UsuarioResponse;
 import task.battilana.com.services.UsuarioService;
 
 import java.util.List;
@@ -21,12 +20,12 @@ public class UsuarioController {
     }
 
     @RequestMapping("/listar")
-    public ResponseEntity<List<UsuarioDto>> listado(){
+    public ResponseEntity<List<UsuarioResponse>> listado(){
         return ResponseEntity.status(HttpStatus.OK).body(this.usuarioService.listado());
     }
 
     @PostMapping("/registrar")
-    public ResponseEntity<UsuarioDto> registrar(@RequestBody UsuarioDto usuarioDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.usuarioService.registrar(usuarioDto));
+    public ResponseEntity<UsuarioResponse> registrar(@RequestBody UsuarioResponse usuarioResponse){
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.usuarioService.registrar(usuarioResponse));
     }
 }

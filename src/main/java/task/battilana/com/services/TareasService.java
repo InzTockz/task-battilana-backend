@@ -28,4 +28,9 @@ public interface TareasService {
     List<TareaResponse> listadoTareasPendientePorUsuario(Long idUsuario);
     List<TareaResponse> listadoTareasTerminadoPorUsuario(Long idUsuario);
     List<TareaResponse> listadoTareasTotalPorUsuario(Long idUsuario);
+
+    //CONTADOR POR USUARIO
+    Integer  contadorPendientesPorUsuario(Long idUsuario);
+    Integer  contadorCompletadoPorUsuario(Long idUsuario);
+    Integer  contadorTotalPorUsuario(Long idUsuario);
 }

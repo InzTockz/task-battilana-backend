@@ -92,4 +92,19 @@ public class TareasController {
     public ResponseEntity<List<TareaResponse>> listadoTotalPorUsuario(@PathVariable Long idUsuario){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoTareasTotalPorUsuario(idUsuario));
     }
+
+    @GetMapping("/contador-pendientes/usuario/{idUsuario}")
+    public ResponseEntity<Integer> contadorPendientesPorUsuario (@PathVariable Long idUsuario){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorPendientesPorUsuario(idUsuario));
+    }
+
+    @GetMapping("/contador-/usuario/{idUsuario}")
+    public ResponseEntity<Integer> contadorCompletoPorUsuario (@PathVariable Long idUsuario){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorCompletadoPorUsuario(idUsuario));
+    }
+
+    @GetMapping("/contador-total/usuario/{idUsuario}")
+    public ResponseEntity<Integer> contadorTotalPorUsuario (@PathVariable Long idUsuario){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorTotalPorUsuario(idUsuario));
+    }
 }

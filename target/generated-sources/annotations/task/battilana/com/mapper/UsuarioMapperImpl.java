@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
-import task.battilana.com.dto.UsuarioDto;
+import task.battilana.com.dto.response.UsuarioResponse;
 import task.battilana.com.entity.UsuariosEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-08-08T16:03:03-0500",
+    date = "2025-08-13T14:48:26-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
 public class UsuarioMapperImpl implements UsuarioMapper {
 
     @Override
-    public List<UsuarioDto> listadoUsuarioMapper(List<UsuariosEntity> listadoUsuariosEntity) {
+    public List<UsuarioResponse> listadoUsuarioMapper(List<UsuariosEntity> listadoUsuariosEntity) {
         if ( listadoUsuariosEntity == null ) {
             return null;
         }
 
-        List<UsuarioDto> list = new ArrayList<UsuarioDto>( listadoUsuariosEntity.size() );
+        List<UsuarioResponse> list = new ArrayList<UsuarioResponse>( listadoUsuariosEntity.size() );
         for ( UsuariosEntity usuariosEntity : listadoUsuariosEntity ) {
             list.add( usuarioDtoMapper( usuariosEntity ) );
         }
@@ -30,7 +30,7 @@ public class UsuarioMapperImpl implements UsuarioMapper {
     }
 
     @Override
-    public UsuarioDto usuarioDtoMapper(UsuariosEntity usuarioEntity) {
+    public UsuarioResponse usuarioDtoMapper(UsuariosEntity usuarioEntity) {
         if ( usuarioEntity == null ) {
             return null;
         }
@@ -43,22 +43,22 @@ public class UsuarioMapperImpl implements UsuarioMapper {
         nombres = usuarioEntity.getNombres();
         correo = usuarioEntity.getCorreo();
 
-        UsuarioDto usuarioDto = new UsuarioDto( idUsuarios, nombres, correo );
+        UsuarioResponse usuarioResponse = new UsuarioResponse( idUsuarios, nombres, correo );
 
-        return usuarioDto;
+        return usuarioResponse;
     }
 
     @Override
-    public UsuariosEntity usuariosEntityMapper(UsuarioDto usuarioDto) {
-        if ( usuarioDto == null ) {
+    public UsuariosEntity usuariosEntityMapper(UsuarioResponse usuarioResponse) {
+        if ( usuarioResponse == null ) {
             return null;
         }
 
         UsuariosEntity usuariosEntity = new UsuariosEntity();
 
-        usuariosEntity.setIdUsuarios( usuarioDto.idUsuarios() );
-        usuariosEntity.setNombres( usuarioDto.nombres() );
-        usuariosEntity.setCorreo( usuarioDto.correo() );
+        usuariosEntity.setIdUsuarios( usuarioResponse.idUsuarios() );
+        usuariosEntity.setNombres( usuarioResponse.nombres() );
+        usuariosEntity.setCorreo( usuarioResponse.correo() );
 
         return usuariosEntity;
     }
