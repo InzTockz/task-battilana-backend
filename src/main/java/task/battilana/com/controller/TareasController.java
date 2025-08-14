@@ -98,7 +98,7 @@ public class TareasController {
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorPendientesPorUsuario(idUsuario));
     }
 
-    @GetMapping("/contador-/usuario/{idUsuario}")
+    @GetMapping("/contador-completado/usuario/{idUsuario}")
     public ResponseEntity<Integer> contadorCompletoPorUsuario (@PathVariable Long idUsuario){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorCompletadoPorUsuario(idUsuario));
     }
