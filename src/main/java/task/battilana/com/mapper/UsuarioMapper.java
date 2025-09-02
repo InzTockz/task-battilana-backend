@@ -2,7 +2,8 @@ package task.battilana.com.mapper;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import task.battilana.com.dto.response.UsuarioResponse;
+import task.battilana.com.dto.UsuarioRequest;
+import task.battilana.com.dto.UsuarioResponse;
 import task.battilana.com.entity.UsuariosEntity;
 
 import java.util.List;
@@ -16,5 +17,5 @@ public interface UsuarioMapper {
     UsuarioResponse usuarioDtoMapper(UsuariosEntity usuarioEntity);
 
     @InheritInverseConfiguration
-    UsuariosEntity usuariosEntityMapper(UsuarioResponse usuarioResponse);
+    UsuariosEntity usuariosEntityMapper(UsuarioRequest usuarioRequest);
 }

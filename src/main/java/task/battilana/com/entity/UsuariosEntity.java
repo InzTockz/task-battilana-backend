@@ -19,8 +19,23 @@ public class UsuariosEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuarios")
     private Long idUsuarios;
+
     @Column(name = "nombres")
     private String nombres;
+
+    @Column(name = "apellidos")
+    private String apellidos;
+
     @Column(name = "correo")
     private String correo;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "estado")
+    private Boolean estado = true;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "roles")
+    private Roles roles = Roles.USUARIO;
 }

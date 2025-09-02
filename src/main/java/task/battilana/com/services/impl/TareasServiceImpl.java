@@ -1,10 +1,8 @@
 package task.battilana.com.services.impl;
 
-import org.springframework.boot.autoconfigure.web.format.DateTimeFormatters;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
-import task.battilana.com.dto.request.TareaRequest;
-import task.battilana.com.dto.response.TareaResponse;
+import task.battilana.com.dto.TareaRequest;
+import task.battilana.com.dto.TareaResponse;
 import task.battilana.com.entity.EstadoEnum;
 import task.battilana.com.entity.TareasEntity;
 import task.battilana.com.entity.UsuariosEntity;
@@ -12,10 +10,7 @@ import task.battilana.com.mapper.TareaMapper;
 import task.battilana.com.repository.TareasRepository;
 import task.battilana.com.services.TareasService;
 
-import javax.swing.text.DateFormatter;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 

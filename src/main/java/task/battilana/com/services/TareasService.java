@@ -1,8 +1,7 @@
 package task.battilana.com.services;
 
-import task.battilana.com.dto.request.TareaRequest;
-import task.battilana.com.dto.response.TareaResponse;
-import task.battilana.com.entity.TareasEntity;
+import task.battilana.com.dto.TareaRequest;
+import task.battilana.com.dto.TareaResponse;
 
 import java.util.List;
 

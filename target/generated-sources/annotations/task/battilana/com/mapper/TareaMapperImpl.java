@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
-import task.battilana.com.dto.request.TareaRequest;
-import task.battilana.com.dto.response.TareaResponse;
+import task.battilana.com.dto.TareaRequest;
+import task.battilana.com.dto.TareaResponse;
 import task.battilana.com.entity.EstadoEnum;
 import task.battilana.com.entity.TareasEntity;
 import task.battilana.com.entity.UsuariosEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-08-08T16:03:03-0500",
+    date = "2025-09-02T11:17:09-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component

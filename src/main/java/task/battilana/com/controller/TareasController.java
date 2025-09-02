@@ -3,9 +3,8 @@ package task.battilana.com.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import task.battilana.com.dto.request.TareaRequest;
-import task.battilana.com.dto.response.TareaResponse;
-import task.battilana.com.entity.TareasEntity;
+import task.battilana.com.dto.TareaRequest;
+import task.battilana.com.dto.TareaResponse;
 import task.battilana.com.services.TareasService;
 
 import java.util.List;

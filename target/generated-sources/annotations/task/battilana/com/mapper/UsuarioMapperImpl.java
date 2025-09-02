@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
-import task.battilana.com.dto.response.UsuarioResponse;
+import task.battilana.com.dto.UsuarioRequest;
+import task.battilana.com.dto.UsuarioResponse;
 import task.battilana.com.entity.UsuariosEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-08-13T14:48:26-0500",
+    date = "2025-09-02T11:17:09-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -35,30 +36,37 @@ public class UsuarioMapperImpl implements UsuarioMapper {
             return null;
         }
 
-        Long idUsuarios = null;
         String nombres = null;
+        String apellidos = null;
         String correo = null;
+        Boolean estado = null;
+        String roles = null;
 
-        idUsuarios = usuarioEntity.getIdUsuarios();
         nombres = usuarioEntity.getNombres();
+        apellidos = usuarioEntity.getApellidos();
         correo = usuarioEntity.getCorreo();
+        estado = usuarioEntity.getEstado();
+        if ( usuarioEntity.getRoles() != null ) {
+            roles = usuarioEntity.getRoles().name();
+        }
 
-        UsuarioResponse usuarioResponse = new UsuarioResponse( idUsuarios, nombres, correo );
+        UsuarioResponse usuarioResponse = new UsuarioResponse( nombres, apellidos, correo, estado, roles );
 
         return usuarioResponse;
     }
 
     @Override
-    public UsuariosEntity usuariosEntityMapper(UsuarioResponse usuarioResponse) {
-        if ( usuarioResponse == null ) {
+    public UsuariosEntity usuariosEntityMapper(UsuarioRequest usuarioRequest) {
+        if ( usuarioRequest == null ) {
             return null;
         }
 
         UsuariosEntity usuariosEntity = new UsuariosEntity();
 
-        usuariosEntity.setIdUsuarios( usuarioResponse.idUsuarios() );
-        usuariosEntity.setNombres( usuarioResponse.nombres() );
-        usuariosEntity.setCorreo( usuarioResponse.correo() );
+        usuariosEntity.setNombres( usuarioRequest.nombres() );
+        usuariosEntity.setApellidos( usuarioRequest.apellidos() );
+        usuariosEntity.setCorreo( usuarioRequest.correo() );
+        usuariosEntity.setPassword( usuarioRequest.password() );
 
         return usuariosEntity;
     }
