@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth
                                 .requestMatchers("/v1/api/usuario/listar").hasAnyRole("ADMINISTRADOR")
-                                .requestMatchers("/v1/api/usuario/registrar").hasAnyRole("ADMINISTRADOR")
+                                //.requestMatchers("/v1/api/usuario/registrar").hasAnyRole("ADMINISTRADOR")
                                 .requestMatchers("/v1/api/tareas/registrar").hasAnyRole("ADMINISTRADOR", "USUARIO")
                                 .requestMatchers("/v1/api/tareas/eliminar/**").hasAnyRole("ADMINISTRADOR", "USUARIO")
                                 .requestMatchers("/v1/api/tareas/actualizar-estado/**").hasAnyRole("ADMINISTRADOR", "USUARIO")
@@ -55,6 +55,7 @@ public class SecurityConfig {
                                 .requestMatchers("/v1/api/tareas/contador-total/usuario/**").hasAnyRole("ADMINISTRADOR", "USUARIO")
 
                                 .requestMatchers("/v1/api/usuario/login").permitAll()
+                                .requestMatchers("/v1/api/usuario/registrar").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class)
