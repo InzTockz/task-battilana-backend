@@ -44,9 +44,18 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioResponse registrar(UsuarioRequest usuarioRequest) {
 
-        UsuariosEntity usuariosEntity = this.usuarioMapper.usuariosEntityMapper(usuarioRequest);
-        usuariosEntity.setPassword(this.encoder.encode(usuariosEntity.getPassword()));
-        return this.usuarioMapper.usuarioDtoMapper(this.usuarioRepository.save(usuariosEntity));
+        UsuariosEntity usuario = this.usuarioRepository.findByCorreo(usuarioRequest.correo());
+
+        if(!usuarioRequest.correo().replace("@battilana.biz", "").equals(
+            usuario.getCorreo().replace("@battilana.biz", "")
+        )){
+            UsuariosEntity usuariosEntity = this.usuarioMapper.usuariosEntityMapper(usuarioRequest);
+            usuariosEntity.setPassword(this.encoder.encode(usuariosEntity.getPassword()));
+            return this.usuarioMapper.usuarioDtoMapper(this.usuarioRepository.save(usuariosEntity));
+        } else {
+            return new UsuarioResponse("", "", "", false,
+                    "", "user_registered");
+        }
     }
 
     @Override

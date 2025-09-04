@@ -5,6 +5,7 @@ public record UsuarioResponse(
         String apellidos,
         String correo,
         Boolean estado,
-        String roles
+        String roles,
+        String registerStatus
 ) {
 }
