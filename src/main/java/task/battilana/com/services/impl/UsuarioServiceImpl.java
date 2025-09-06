@@ -53,7 +53,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuariosEntity.setPassword(this.encoder.encode(usuariosEntity.getPassword()));
             return this.usuarioMapper.usuarioDtoMapper(this.usuarioRepository.save(usuariosEntity));
         } else {
-            return new UsuarioResponse("", "", "", false,
+            return new UsuarioResponse(null, "", "", "", false,
                     "", "user_registered");
         }
     }

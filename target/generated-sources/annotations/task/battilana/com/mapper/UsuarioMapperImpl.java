@@ -10,7 +10,7 @@ import task.battilana.com.entity.UsuariosEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-04T09:46:25-0500",
+    date = "2025-09-04T15:42:53-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -36,12 +36,14 @@ public class UsuarioMapperImpl implements UsuarioMapper {
             return null;
         }
 
+        Long idUsuarios = null;
         String nombres = null;
         String apellidos = null;
         String correo = null;
         Boolean estado = null;
         String roles = null;
 
+        idUsuarios = usuarioEntity.getIdUsuarios();
         nombres = usuarioEntity.getNombres();
         apellidos = usuarioEntity.getApellidos();
         correo = usuarioEntity.getCorreo();
@@ -52,7 +54,7 @@ public class UsuarioMapperImpl implements UsuarioMapper {
 
         String registerStatus = null;
 
-        UsuarioResponse usuarioResponse = new UsuarioResponse( nombres, apellidos, correo, estado, roles, registerStatus );
+        UsuarioResponse usuarioResponse = new UsuarioResponse( idUsuarios, nombres, apellidos, correo, estado, roles, registerStatus );
 
         return usuarioResponse;
     }
