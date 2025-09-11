@@ -40,4 +40,8 @@ public class TareasEntity {
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private UsuariosEntity usuariosEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "id_carpeta")
+    private CarpetasEntity idCarpeta;
 }

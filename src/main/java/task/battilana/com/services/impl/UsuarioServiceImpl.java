@@ -46,15 +46,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         UsuariosEntity usuario = this.usuarioRepository.findByCorreo(usuarioRequest.correo());
 
-        if(!usuarioRequest.correo().replace("@battilana.biz", "").equals(
-            usuario.getCorreo().replace("@battilana.biz", "")
-        )){
+        if (usuario != null) {
+            return new UsuarioResponse(null, "", "", "", false,
+                    "", "user_registered");
+        } else {
             UsuariosEntity usuariosEntity = this.usuarioMapper.usuariosEntityMapper(usuarioRequest);
             usuariosEntity.setPassword(this.encoder.encode(usuariosEntity.getPassword()));
             return this.usuarioMapper.usuarioDtoMapper(this.usuarioRepository.save(usuariosEntity));
-        } else {
-            return new UsuarioResponse(null, "", "", "", false,
-                    "", "user_registered");
         }
     }
 
@@ -68,10 +66,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         UsuariosEntity usuariosEntity = this.usuarioRepository.findByCorreo(loginRequest.username());
 
-        if(usuariosEntity!=null){
+        if (usuariosEntity != null) {
             boolean passwordIsTrue = this.encoder.matches(loginRequest.password(), usuariosEntity.getPassword());
 
-            if(loginRequest.username().equals(usuariosEntity.getCorreo()) && passwordIsTrue){
+            if (loginRequest.username().equals(usuariosEntity.getCorreo()) && passwordIsTrue) {
                 Authentication authentication = authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password())
                 );
