@@ -13,14 +13,17 @@ public interface TareaMapper {
 
     @Mapping(target = "idUsuariosEntity", source = "usuariosEntity.idUsuarios")
     @Mapping(target = "nombreUsuarioEntity", source = "usuariosEntity.nombres")
+    @Mapping(target = "idCarpeta", source = "idCarpeta.idCarpeta")
     List<TareaResponse> listadoTareaDto(List<TareasEntity> listadoTareasEntity);
 
     @Mapping(target = "idUsuariosEntity", source = "usuariosEntity.idUsuarios")
     @Mapping(target = "estado", source = "estadoEnum")
     @Mapping(target = "nombreUsuarioEntity", source = "usuariosEntity.nombres")
+    @Mapping(target = "idCarpeta", source = "idCarpeta.idCarpeta")
     TareaResponse tareaDtoResponse (TareasEntity tareasEntity);
 
     @Mapping(target = "usuariosEntity.idUsuarios", source = "idUsuariosEntity")
+    @Mapping(target= "idCarpeta.idCarpeta", source = "idCarpeta")
     TareasEntity tareasEntityMapper (TareaRequest tareaDto);
 
 }

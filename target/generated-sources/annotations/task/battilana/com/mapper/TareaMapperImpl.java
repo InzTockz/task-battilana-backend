@@ -8,13 +8,14 @@ import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 import task.battilana.com.dto.TareaRequest;
 import task.battilana.com.dto.TareaResponse;
+import task.battilana.com.entity.CarpetasEntity;
 import task.battilana.com.entity.EstadoEnum;
 import task.battilana.com.entity.TareasEntity;
 import task.battilana.com.entity.UsuariosEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-11T17:11:51-0500",
+    date = "2025-09-13T20:36:19-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -43,6 +44,7 @@ public class TareaMapperImpl implements TareaMapper {
         Long idUsuariosEntity = null;
         EstadoEnum estado = null;
         String nombreUsuarioEntity = null;
+        Long idCarpeta = null;
         Long idTarea = null;
         String nombreTarea = null;
         String descripcion = null;
@@ -53,6 +55,7 @@ public class TareaMapperImpl implements TareaMapper {
         idUsuariosEntity = tareasEntityUsuariosEntityIdUsuarios( tareasEntity );
         estado = tareasEntity.getEstadoEnum();
         nombreUsuarioEntity = tareasEntityUsuariosEntityNombres( tareasEntity );
+        idCarpeta = tareasEntityIdCarpetaIdCarpeta( tareasEntity );
         idTarea = tareasEntity.getIdTarea();
         nombreTarea = tareasEntity.getNombreTarea();
         descripcion = tareasEntity.getDescripcion();
@@ -64,7 +67,7 @@ public class TareaMapperImpl implements TareaMapper {
             fechaFin = DateTimeFormatter.ISO_LOCAL_DATE.format( tareasEntity.getFechaFin() );
         }
 
-        TareaResponse tareaResponse = new TareaResponse( idTarea, nombreTarea, descripcion, estado, fechaCreacion, fechaInicio, fechaFin, idUsuariosEntity, nombreUsuarioEntity );
+        TareaResponse tareaResponse = new TareaResponse( idTarea, nombreTarea, descripcion, estado, fechaCreacion, fechaInicio, fechaFin, idUsuariosEntity, nombreUsuarioEntity, idCarpeta );
 
         return tareaResponse;
     }
@@ -78,6 +81,7 @@ public class TareaMapperImpl implements TareaMapper {
         TareasEntity tareasEntity = new TareasEntity();
 
         tareasEntity.setUsuariosEntity( tareaRequestToUsuariosEntity( tareaDto ) );
+        tareasEntity.setIdCarpeta( tareaRequestToCarpetasEntity( tareaDto ) );
         tareasEntity.setNombreTarea( tareaDto.nombreTarea() );
         tareasEntity.setDescripcion( tareaDto.descripcion() );
         if ( tareaDto.fechaInicio() != null ) {
@@ -120,6 +124,21 @@ public class TareaMapperImpl implements TareaMapper {
         return nombres;
     }
 
+    private Long tareasEntityIdCarpetaIdCarpeta(TareasEntity tareasEntity) {
+        if ( tareasEntity == null ) {
+            return null;
+        }
+        CarpetasEntity idCarpeta = tareasEntity.getIdCarpeta();
+        if ( idCarpeta == null ) {
+            return null;
+        }
+        Long idCarpeta1 = idCarpeta.getIdCarpeta();
+        if ( idCarpeta1 == null ) {
+            return null;
+        }
+        return idCarpeta1;
+    }
+
     protected UsuariosEntity tareaRequestToUsuariosEntity(TareaRequest tareaRequest) {
         if ( tareaRequest == null ) {
             return null;
@@ -130,5 +149,17 @@ public class TareaMapperImpl implements TareaMapper {
         usuariosEntity.setIdUsuarios( tareaRequest.idUsuariosEntity() );
 
         return usuariosEntity;
+    }
+
+    protected CarpetasEntity tareaRequestToCarpetasEntity(TareaRequest tareaRequest) {
+        if ( tareaRequest == null ) {
+            return null;
+        }
+
+        CarpetasEntity carpetasEntity = new CarpetasEntity();
+
+        carpetasEntity.setIdCarpeta( tareaRequest.idCarpeta() );
+
+        return carpetasEntity;
     }
 }

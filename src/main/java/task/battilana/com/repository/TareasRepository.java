@@ -77,4 +77,10 @@ public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
             "WHERE T.usuariosEntity.idUsuarios=:idUsuario")
     Integer contadorTotalPorUsuario(@Param("idUsuario") Long idUsuario);
 
+    @Query("SELECT T " +
+            "FROM TareasEntity T " +
+            "INNER JOIN CarpetasEntity C ON C.idCarpeta = T.idCarpeta.idCarpeta " +
+            "WHERE T.idCarpeta.idCarpeta =:idCarpeta AND T.estadoEnum=:estado")
+    List<TareasEntity> listadoTareasPorCarpetas(@Param("idCarpeta") Long idCarpeta, @Param("estado") String estado);
+
 }

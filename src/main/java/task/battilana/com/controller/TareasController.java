@@ -20,6 +20,7 @@ public class TareasController {
         this.tareasService = tareasService;
     }
 
+    //SECCION DE TAREAS EN GENERAL
     @GetMapping("/listar")
     public ResponseEntity<List<TareaResponse>> listado(){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listado());
@@ -46,6 +47,7 @@ public class TareasController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    //SECCION DE CONTADORES GENERALES0
     @GetMapping("/contador-pendientes")
     public ResponseEntity<Integer> contadorPendientes (){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorPendientes());
@@ -106,4 +108,10 @@ public class TareasController {
     public ResponseEntity<Integer> contadorTotalPorUsuario (@PathVariable Long idUsuario){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorTotalPorUsuario(idUsuario));
     }
+
+    //SECCION TAREAS POR CARPETA
+    @GetMapping("/listado/carpeta/{idCarpeta}/")
+    public ResponseEntity<List<TareaResponse>> listadoTareasPorCarpetaYEstado(@RequestParam("idCarpeta") Long idCarpeta, @RequestParam("estado") String estado){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoTareasPorCarpeta(idCarpeta, estado));
+    }// ACA ME QUEDE <-
 }

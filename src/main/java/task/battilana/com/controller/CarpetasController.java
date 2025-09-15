@@ -1,5 +1,6 @@
 package task.battilana.com.controller;
 
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +23,16 @@ public class CarpetasController {
 
     @GetMapping("/listado")
     public ResponseEntity<List<CarpetaResponse>> findAll(){
-        return ResponseEntity.status(HttpStatus.OK).body(this.carpetasService.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(this.carpetasService.listado());
     }
 
     @PostMapping("/registrar")
     public ResponseEntity<CarpetaResponse> registrar(@RequestBody CarpetaRequest carpetaRequest){
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.carpetasService.saveCarpetas(carpetaRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.carpetasService.registrar(carpetaRequest));
+    }
+
+    @GetMapping("/buscar/{idUsuario}")
+    public ResponseEntity<List<CarpetaResponse>> buscar(@PathVariable Long idUsuario){
+        return ResponseEntity.status(HttpStatus.OK).body(this.carpetasService.buscar(idUsuario));
     }
 }

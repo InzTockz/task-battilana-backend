@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface CarpetasService {
 
-    List<CarpetaResponse> findAll();
-    CarpetaResponse saveCarpetas(CarpetaRequest carpetaRequest);
+    List<CarpetaResponse> listado();
+    CarpetaResponse registrar(CarpetaRequest carpetaRequest);
+    List<CarpetaResponse> buscar(Long idUsuario);
 
 }

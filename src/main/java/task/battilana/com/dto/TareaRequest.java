@@ -5,6 +5,7 @@ public record TareaRequest(
         String descripcion,
         String fechaInicio,
         String fechaFin,
-        Long idUsuariosEntity
+        Long idUsuariosEntity,
+        Long idCarpeta
 ) {
 }

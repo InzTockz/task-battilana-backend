@@ -21,12 +21,17 @@ public class CarpetasServiceImpl implements CarpetasService {
     }
 
     @Override
-    public List<CarpetaResponse> findAll() {
+    public List<CarpetaResponse> listado() {
         return this.carpetaMapper.toListCarpetaResponse(this.carpetasRepository.findAll());
     }
 
     @Override
-    public CarpetaResponse saveCarpetas(CarpetaRequest carpetaRequest) {
+    public CarpetaResponse registrar(CarpetaRequest carpetaRequest) {
         return this.carpetaMapper.toCarpetaResponse(this.carpetasRepository.save(this.carpetaMapper.toCarpetaEntity(carpetaRequest)));
+    }
+
+    @Override
+    public List<CarpetaResponse> buscar(Long idUsuario) {
+        return this.carpetaMapper.toListCarpetaResponse(this.carpetasRepository.findCarpetaByUsuario(idUsuario));
     }
 }

@@ -33,14 +33,17 @@ public class TareasServiceImpl implements TareasService {
     @Override
     public TareaResponse registrar(TareaRequest tareaDto) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        TareasEntity tareasEntity = new TareasEntity();
-        tareasEntity.setNombreTarea(tareaDto.nombreTarea());
-        tareasEntity.setDescripcion(tareaDto.descripcion());
-        tareasEntity.setFechaInicio(LocalDate.parse(tareaDto.fechaInicio(), dateTimeFormatter));
-        tareasEntity.setFechaFin(LocalDate.parse(tareaDto.fechaFin(), dateTimeFormatter));
-        UsuariosEntity usuariosEntity = new UsuariosEntity();
-        usuariosEntity.setIdUsuarios(tareaDto.idUsuariosEntity());
-        tareasEntity.setUsuariosEntity(usuariosEntity);
+//        TareasEntity tareasEntity = new TareasEntity();
+//        tareasEntity.setNombreTarea(tareaDto.nombreTarea());
+//        tareasEntity.setDescripcion(tareaDto.descripcion());
+//        tareasEntity.setFechaInicio(LocalDate.parse(tareaDto.fechaInicio(), dateTimeFormatter));
+//        tareasEntity.setFechaFin(LocalDate.parse(tareaDto.fechaFin(), dateTimeFormatter));
+//        UsuariosEntity usuariosEntity = new UsuariosEntity();
+//        usuariosEntity.setIdUsuarios(tareaDto.idUsuariosEntity());
+//        tareasEntity.setUsuariosEntity(usuariosEntity);
+
+        TareasEntity tareasEntity = this.tareaMapper.tareasEntityMapper(tareaDto);
+
 
         return this.tareaMapper.tareaDtoResponse(this.tareasRepository.save(tareasEntity));
     }
@@ -136,5 +139,10 @@ public class TareasServiceImpl implements TareasService {
     @Override
     public Integer contadorTotalPorUsuario(Long idUsuario) {
         return this.tareasRepository.contadorTotalPorUsuario(idUsuario);
+    }
+
+    @Override
+    public List<TareaResponse> listadoTareasPorCarpeta(Long idCarpeta, String estado) {
+        return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoTareasPorCarpetas(idCarpeta, estado));
     }
 }

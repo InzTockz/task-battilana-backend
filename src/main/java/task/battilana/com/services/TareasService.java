@@ -32,4 +32,7 @@ public interface TareasService {
     Integer  contadorPendientesPorUsuario(Long idUsuario);
     Integer  contadorCompletadoPorUsuario(Long idUsuario);
     Integer  contadorTotalPorUsuario(Long idUsuario);
+
+    //LISTAD TAREAS POR CARPETA
+    List<TareaResponse> listadoTareasPorCarpeta(Long idCarpeta, String estado);
 }

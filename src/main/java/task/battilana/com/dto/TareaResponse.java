@@ -13,6 +13,7 @@ public record TareaResponse (
         String fechaInicio,
         String fechaFin,
         Long idUsuariosEntity,
-        String nombreUsuarioEntity
+        String nombreUsuarioEntity,
+        Long idCarpeta
 ){
 }
