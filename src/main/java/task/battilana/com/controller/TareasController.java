@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import task.battilana.com.dto.TareaRequest;
 import task.battilana.com.dto.TareaResponse;
+import task.battilana.com.entity.EstadoEnum;
 import task.battilana.com.services.TareasService;
 
 import java.util.List;
@@ -110,8 +111,8 @@ public class TareasController {
     }
 
     //SECCION TAREAS POR CARPETA
-    @GetMapping("/listado/carpeta/{idCarpeta}/")
-    public ResponseEntity<List<TareaResponse>> listadoTareasPorCarpetaYEstado(@RequestParam("idCarpeta") Long idCarpeta, @RequestParam("estado") String estado){
+    @GetMapping("/listado/carpeta")
+    public ResponseEntity<List<TareaResponse>> listadoTareasPorCarpetaYEstado(@RequestParam("idCarpeta") Long idCarpeta, @RequestParam("estado") EstadoEnum estado){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoTareasPorCarpeta(idCarpeta, estado));
     }// ACA ME QUEDE <-
 }

@@ -142,7 +142,7 @@ public class TareasServiceImpl implements TareasService {
     }
 
     @Override
-    public List<TareaResponse> listadoTareasPorCarpeta(Long idCarpeta, String estado) {
+    public List<TareaResponse> listadoTareasPorCarpeta(Long idCarpeta, EstadoEnum estado) {
         return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoTareasPorCarpetas(idCarpeta, estado));
     }
 }

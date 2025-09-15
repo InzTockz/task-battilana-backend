@@ -2,6 +2,7 @@ package task.battilana.com.services;
 
 import task.battilana.com.dto.TareaRequest;
 import task.battilana.com.dto.TareaResponse;
+import task.battilana.com.entity.EstadoEnum;
 
 import java.util.List;
 
@@ -34,5 +35,5 @@ public interface TareasService {
     Integer  contadorTotalPorUsuario(Long idUsuario);
 
     //LISTAD TAREAS POR CARPETA
-    List<TareaResponse> listadoTareasPorCarpeta(Long idCarpeta, String estado);
+    List<TareaResponse> listadoTareasPorCarpeta(Long idCarpeta, EstadoEnum estado);
 }
