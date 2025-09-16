@@ -1,6 +1,5 @@
 package task.battilana.com.controller;
 
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +31,12 @@ public class CarpetasController {
     }
 
     @GetMapping("/buscar/{idUsuario}")
-    public ResponseEntity<List<CarpetaResponse>> buscar(@PathVariable Long idUsuario){
-        return ResponseEntity.status(HttpStatus.OK).body(this.carpetasService.buscar(idUsuario));
+    public ResponseEntity<List<CarpetaResponse>> buscarCarpetasPorId(@PathVariable Long idUsuario){
+        return ResponseEntity.status(HttpStatus.OK).body(this.carpetasService.buscarListaId(idUsuario));
+    }
+
+    @GetMapping("/buscar/carpeta/{idUsuario}")
+    public ResponseEntity<CarpetaResponse> buscarCarpetaPorId(@PathVariable Long idUsuario){
+        return ResponseEntity.status(HttpStatus.OK).body(this.carpetasService.buscarId(idUsuario));
     }
 }

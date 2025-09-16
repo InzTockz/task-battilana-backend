@@ -9,6 +9,7 @@ public interface CarpetasService {
 
     List<CarpetaResponse> listado();
     CarpetaResponse registrar(CarpetaRequest carpetaRequest);
-    List<CarpetaResponse> buscar(Long idUsuario);
+    List<CarpetaResponse> buscarListaId(Long idUsuario);
+    CarpetaResponse buscarId(Long idUsuario);
 
 }

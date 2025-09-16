@@ -31,7 +31,12 @@ public class CarpetasServiceImpl implements CarpetasService {
     }
 
     @Override
-    public List<CarpetaResponse> buscar(Long idUsuario) {
+    public List<CarpetaResponse> buscarListaId(Long idUsuario) {
         return this.carpetaMapper.toListCarpetaResponse(this.carpetasRepository.findCarpetaByUsuario(idUsuario));
+    }
+
+    @Override
+    public CarpetaResponse buscarId(Long idUsuario) {
+        return this.carpetaMapper.toCarpetaResponse(this.carpetasRepository.findById(idUsuario).get());
     }
 }
