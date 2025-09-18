@@ -82,6 +82,23 @@ public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
             "FROM TareasEntity T " +
             "INNER JOIN CarpetasEntity C ON C.idCarpeta = T.idCarpeta.idCarpeta " +
             "WHERE T.idCarpeta.idCarpeta =:idCarpeta AND T.estadoEnum=:estado")
-    List<TareasEntity> listadoTareasPorCarpetas(@Param("idCarpeta") Long idCarpeta, @Param("estado") EstadoEnum estado);
+    List<TareasEntity> listadoPorCarpetaYEstado(@Param("idCarpeta") Long idCarpeta, @Param("estado") EstadoEnum estado);
 
+    @Query("SELECT T " +
+            "FROM TareasEntity T " +
+            "INNER JOIN CarpetasEntity C ON C.idCarpeta = T.idCarpeta.idCarpeta " +
+            "WHERE T.idCarpeta.idCarpeta =:idCarpeta")
+    List<TareasEntity> listadoPorCarpeta(@Param("idCarpeta") Long idCarpeta);
+
+    @Query("SELECT count(T.idTarea) " +
+            "FROM TareasEntity T " +
+            "INNER JOIN CarpetasEntity C ON C.idCarpeta = T.idCarpeta.idCarpeta " +
+            "WHERE T.idCarpeta.idCarpeta =:idCarpeta AND T.estadoEnum=:estado")
+    Integer contadorPorCarpetaYEstado(@Param("idCarpeta") Long idCarpeta, @Param("estado") EstadoEnum estado);
+
+    @Query("SELECT count(T.idTarea) " +
+            "FROM TareasEntity T " +
+            "INNER JOIN CarpetasEntity C ON C.idCarpeta = T.idCarpeta.idCarpeta " +
+            "WHERE T.idCarpeta.idCarpeta =:idCarpeta")
+    Integer contadorPorCarpeta(@Param("idCarpeta") Long idCarpeta);
 }

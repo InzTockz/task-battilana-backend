@@ -5,6 +5,7 @@ public record CarpetaResponse(
         String nombreCarpeta,
         String fechaCreacion,
         String fechaModificacion,
-        Long idUsuario
+        Long idUsuario,
+        Integer contadorDeTareas
 ) {
 }

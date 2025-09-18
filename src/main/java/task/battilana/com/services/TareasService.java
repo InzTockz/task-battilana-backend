@@ -36,4 +36,5 @@ public interface TareasService {
 
     //LISTAD TAREAS POR CARPETA
     List<TareaResponse> listadoTareasPorCarpeta(Long idCarpeta, EstadoEnum estado);
+    Integer contadorPorCarpetasYEstado(Long idCarpeta, EstadoEnum estado);
 }

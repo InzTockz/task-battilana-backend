@@ -112,7 +112,12 @@ public class TareasController {
 
     //SECCION TAREAS POR CARPETA
     @GetMapping("/listado/carpeta")
-    public ResponseEntity<List<TareaResponse>> listadoTareasPorCarpetaYEstado(@RequestParam("idCarpeta") Long idCarpeta, @RequestParam("estado") EstadoEnum estado){
+    public ResponseEntity<List<TareaResponse>> listadoTareasPorCarpetaYEstado(@RequestParam("idCarpeta") Long idCarpeta, @RequestParam(value = "estado", required = false) EstadoEnum estado){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoTareasPorCarpeta(idCarpeta, estado));
-    }// ACA ME QUEDE <-
+    }
+
+    @GetMapping("contador/carpeta")
+    public ResponseEntity<Integer> contadorPorCarpetaYEstado(@RequestParam("idCarpeta") Long idCarpeta, @RequestParam(value = "estado", required = false) EstadoEnum estado){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorPorCarpetasYEstado(idCarpeta, estado));
+    }
 }
