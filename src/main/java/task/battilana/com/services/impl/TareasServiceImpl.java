@@ -13,6 +13,7 @@ import task.battilana.com.services.TareasService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TareasServiceImpl implements TareasService {
@@ -42,7 +43,7 @@ public class TareasServiceImpl implements TareasService {
 
     @Override
     public TareaResponse actualizar(Long id, TareaRequest tareaDto) {
-        if(id!=null){
+        if (id != null) {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             TareasEntity tareasEntity = new TareasEntity();
             tareasEntity.setIdTarea(id);
@@ -86,10 +87,31 @@ public class TareasServiceImpl implements TareasService {
 
     @Override
     public void actualizarEstado(Long id) {
-        if(id!=null){
+        if (id != null) {
             TareasEntity tareasEntity = this.tareasRepository.findById(id).get();
             tareasEntity.setEstadoEnum(EstadoEnum.TERMINADO);
             this.tareasRepository.save(tareasEntity);
+        }
+    }
+
+    @Override
+    public void agregarComentario(Long idTarea, String comentario) {
+        if (idTarea != null) {
+            Optional<TareasEntity> tareasEntity = this.tareasRepository.findById(idTarea);
+
+            if ( comentario != null && !comentario.equalsIgnoreCase("")) {
+                if (tareasEntity.isPresent()) {
+                    tareasEntity.get().setComentario(comentario);
+                    tareasEntity.get().setEstadoEnum(EstadoEnum.TERMINADO);
+                    this.tareasRepository.save(tareasEntity.get());
+                }
+            } else {
+                if (tareasEntity.isPresent()) {
+                    tareasEntity.get().setComentario("");
+                    tareasEntity.get().setEstadoEnum(EstadoEnum.TERMINADO);
+                    this.tareasRepository.save(tareasEntity.get());
+                }
+            }
         }
     }
 
@@ -135,7 +157,7 @@ public class TareasServiceImpl implements TareasService {
 
     @Override
     public List<TareaResponse> listadoTareasPorCarpeta(Long idCarpeta, EstadoEnum estado) {
-        if(estado != null){
+        if (estado != null) {
             return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoPorCarpetaYEstado(idCarpeta, estado));
         } else {
             return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoPorCarpeta(idCarpeta));
@@ -144,7 +166,7 @@ public class TareasServiceImpl implements TareasService {
 
     @Override
     public Integer contadorPorCarpetasYEstado(Long idCarpeta, EstadoEnum estado) {
-        if(estado != null){
+        if (estado != null) {
             return this.tareasRepository.contadorPorCarpetaYEstado(idCarpeta, estado);
         } else {
             return this.tareasRepository.contadorPorCarpeta(idCarpeta);

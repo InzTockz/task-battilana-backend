@@ -65,6 +65,16 @@ public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
     //CONTADOR DE TAREAS POR USUARIO
     @Query("SELECT COUNT(T.idTarea) " +
             "FROM TareasEntity T " +
+            "WHERE T.usuariosEntity.idUsuarios=:idUsuario AND T.estadoEnum=:estado")
+    Integer contadorEstadoPorUsuario(@Param("idUsuario") Long idUsuario, @Param("estado") EstadoEnum estado);
+
+    @Query("SELECT COUNT(T.idTarea) " +
+            "FROM TareasEntity T " +
+            "WHERE T.usuariosEntity.idUsuarios=:idUsuario")
+    Integer contadorPorUsuario(@Param("idUsuario") Long idUsuario);
+
+    @Query("SELECT COUNT(T.idTarea) " +
+            "FROM TareasEntity T " +
             "WHERE T.usuariosEntity.idUsuarios=:idUsuario AND T.estadoEnum='PENDIENTE'")
     Integer contadorPendientesPorUsuario(@Param("idUsuario") Long idUsuario);
 
@@ -78,6 +88,7 @@ public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
             "WHERE T.usuariosEntity.idUsuarios=:idUsuario")
     Integer contadorTotalPorUsuario(@Param("idUsuario") Long idUsuario);
 
+    //LISTADO POR CARPETA Y ESTADO
     @Query("SELECT T " +
             "FROM TareasEntity T " +
             "INNER JOIN CarpetasEntity C ON C.idCarpeta = T.idCarpeta.idCarpeta " +
@@ -90,6 +101,7 @@ public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
             "WHERE T.idCarpeta.idCarpeta =:idCarpeta")
     List<TareasEntity> listadoPorCarpeta(@Param("idCarpeta") Long idCarpeta);
 
+    //CONTADORES POR USUARIO Y ESTADO
     @Query("SELECT count(T.idTarea) " +
             "FROM TareasEntity T " +
             "INNER JOIN CarpetasEntity C ON C.idCarpeta = T.idCarpeta.idCarpeta " +

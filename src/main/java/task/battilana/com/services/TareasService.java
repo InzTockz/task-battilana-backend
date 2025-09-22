@@ -19,6 +19,7 @@ public interface TareasService {
     Integer contadorTerminados();
     Integer contadorTotales();
     void actualizarEstado (Long id);
+    void agregarComentario(Long idTarea, String comentario);
 
     //LISTADO POR TIPO
     List<TareaResponse> listadoPorPendiente();

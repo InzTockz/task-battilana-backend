@@ -36,6 +36,8 @@ public class TareasEntity {
     private LocalDate fechaInicio;
     @Column(name = "fecha_fin")
     private LocalDate fechaFin;
+    @Column(name = "comentario")
+    private String comentario = "";
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")

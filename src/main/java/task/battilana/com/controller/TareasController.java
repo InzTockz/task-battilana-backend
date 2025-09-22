@@ -70,6 +70,12 @@ public class TareasController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @PutMapping("/actualizar-comentario")
+    public ResponseEntity<Void> actualizarComentaroYEstado(@RequestParam("idTarea") Long idTarea, @RequestParam(value = "comentario", required = false) String comentario){
+        this.tareasService.agregarComentario(idTarea, comentario);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/listado-pendientes")
     public ResponseEntity<List<TareaResponse>> listadoPendientes(){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoPorPendiente());
