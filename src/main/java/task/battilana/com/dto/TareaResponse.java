@@ -12,6 +12,7 @@ public record TareaResponse (
         LocalDate fechaCreacion,
         String fechaInicio,
         String fechaFin,
+        String comentario,
         Long idUsuariosEntity,
         String nombreUsuarioEntity,
         Long idCarpeta

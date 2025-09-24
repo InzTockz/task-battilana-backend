@@ -10,7 +10,7 @@ import task.battilana.com.entity.UsuariosEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-17T11:10:04-0500",
+    date = "2025-09-24T11:40:02-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component

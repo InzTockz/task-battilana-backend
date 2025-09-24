@@ -15,7 +15,7 @@ import task.battilana.com.entity.UsuariosEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-17T11:10:04-0500",
+    date = "2025-09-24T11:40:02-0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -51,6 +51,7 @@ public class TareaMapperImpl implements TareaMapper {
         LocalDate fechaCreacion = null;
         String fechaInicio = null;
         String fechaFin = null;
+        String comentario = null;
 
         idUsuariosEntity = tareasEntityUsuariosEntityIdUsuarios( tareasEntity );
         estado = tareasEntity.getEstadoEnum();
@@ -66,8 +67,9 @@ public class TareaMapperImpl implements TareaMapper {
         if ( tareasEntity.getFechaFin() != null ) {
             fechaFin = DateTimeFormatter.ISO_LOCAL_DATE.format( tareasEntity.getFechaFin() );
         }
+        comentario = tareasEntity.getComentario();
 
-        TareaResponse tareaResponse = new TareaResponse( idTarea, nombreTarea, descripcion, estado, fechaCreacion, fechaInicio, fechaFin, idUsuariosEntity, nombreUsuarioEntity, idCarpeta );
+        TareaResponse tareaResponse = new TareaResponse( idTarea, nombreTarea, descripcion, estado, fechaCreacion, fechaInicio, fechaFin, comentario, idUsuariosEntity, nombreUsuarioEntity, idCarpeta );
 
         return tareaResponse;
     }
