@@ -3,10 +3,12 @@ package task.battilana.com.services.impl;
 import org.springframework.stereotype.Service;
 import task.battilana.com.dto.TareaRequest;
 import task.battilana.com.dto.TareaResponse;
+import task.battilana.com.entity.CarpetasEntity;
 import task.battilana.com.entity.EstadoEnum;
 import task.battilana.com.entity.TareasEntity;
 import task.battilana.com.entity.UsuariosEntity;
 import task.battilana.com.mapper.TareaMapper;
+import task.battilana.com.repository.CarpetasRepository;
 import task.battilana.com.repository.TareasRepository;
 import task.battilana.com.services.TareasService;
 
@@ -20,10 +22,12 @@ public class TareasServiceImpl implements TareasService {
 
     private final TareaMapper tareaMapper;
     private final TareasRepository tareasRepository;
+    private final CarpetasRepository carpetasRepository;
 
-    public TareasServiceImpl(TareaMapper tareaMapper, TareasRepository tareasRepository) {
+    public TareasServiceImpl(TareaMapper tareaMapper, TareasRepository tareasRepository, CarpetasRepository carpetasRepository) {
         this.tareaMapper = tareaMapper;
         this.tareasRepository = tareasRepository;
+        this.carpetasRepository = carpetasRepository;
     }
 
     @Override
@@ -33,11 +37,10 @@ public class TareasServiceImpl implements TareasService {
 
     @Override
     public TareaResponse registrar(TareaRequest tareaDto) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
         TareasEntity tareasEntity = this.tareaMapper.tareasEntityMapper(tareaDto);
-
-
+        CarpetasEntity carpetasEntity = this.carpetasRepository.findById(tareaDto.idCarpeta()).get();
+        carpetasEntity.setFechaModificacion(LocalDate.now());
+        this.carpetasRepository.save(carpetasEntity);
         return this.tareaMapper.tareaDtoResponse(this.tareasRepository.save(tareasEntity));
     }
 
@@ -45,7 +48,7 @@ public class TareasServiceImpl implements TareasService {
     public TareaResponse actualizar(Long id, TareaRequest tareaDto) {
         if (id != null) {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            TareasEntity tareasEntity = new TareasEntity();
+            TareasEntity tareasEntity = this.tareasRepository.findById(id).get();
             tareasEntity.setIdTarea(id);
             tareasEntity.setNombreTarea(tareaDto.nombreTarea());
             tareasEntity.setDescripcion(tareaDto.descripcion());
@@ -54,6 +57,12 @@ public class TareasServiceImpl implements TareasService {
             UsuariosEntity usuariosEntity = new UsuariosEntity();
             usuariosEntity.setIdUsuarios(tareaDto.idUsuariosEntity());
             tareasEntity.setUsuariosEntity(usuariosEntity);
+            CarpetasEntity carpetasEntity = this.carpetasRepository.findById(tareaDto.idCarpeta()).get();
+            tareasEntity.setIdCarpeta(carpetasEntity);
+
+            carpetasEntity.setFechaModificacion(LocalDate.now());
+            this.carpetasRepository.save(carpetasEntity);
+
             return this.tareaMapper.tareaDtoResponse(this.tareasRepository.save(tareasEntity));
         } else {
             return null;
@@ -68,6 +77,11 @@ public class TareasServiceImpl implements TareasService {
     @Override
     public void eliminar(Long id) {
         this.tareasRepository.deleteById(id);
+
+        TareasEntity tareasEntity = this.tareasRepository.findById(id).get();
+        CarpetasEntity carpetasEntity = this.carpetasRepository.findById(tareasEntity.getIdCarpeta().getIdCarpeta()).get();
+        carpetasEntity.setFechaModificacion(LocalDate.now());
+        this.carpetasRepository.save(carpetasEntity);
     }
 
     @Override
@@ -103,12 +117,22 @@ public class TareasServiceImpl implements TareasService {
                 if (tareasEntity.isPresent()) {
                     tareasEntity.get().setComentario(comentario);
                     tareasEntity.get().setEstadoEnum(EstadoEnum.TERMINADO);
+
+                    CarpetasEntity carpetasEntity = this.carpetasRepository.findById(tareasEntity.get().getIdCarpeta().getIdCarpeta()).get();
+                    carpetasEntity.setFechaModificacion(LocalDate.now());
+                    this.carpetasRepository.save(carpetasEntity);
+
                     this.tareasRepository.save(tareasEntity.get());
                 }
             } else {
                 if (tareasEntity.isPresent()) {
                     tareasEntity.get().setComentario("");
                     tareasEntity.get().setEstadoEnum(EstadoEnum.TERMINADO);
+
+                    CarpetasEntity carpetasEntity = this.carpetasRepository.findById(tareasEntity.get().getIdCarpeta().getIdCarpeta()).get();
+                    carpetasEntity.setFechaModificacion(LocalDate.now());
+                    this.carpetasRepository.save(carpetasEntity);
+
                     this.tareasRepository.save(tareasEntity.get());
                 }
             }

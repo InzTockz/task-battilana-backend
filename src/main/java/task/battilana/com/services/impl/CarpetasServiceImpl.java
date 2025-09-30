@@ -7,6 +7,7 @@ import task.battilana.com.mapper.CarpetaMapper;
 import task.battilana.com.repository.CarpetasRepository;
 import task.battilana.com.services.CarpetasService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -39,4 +40,11 @@ public class CarpetasServiceImpl implements CarpetasService {
     public CarpetaResponse buscarId(Long idUsuario) {
         return this.carpetaMapper.toCarpetaResponse(this.carpetasRepository.findById(idUsuario).get());
     }
+
+    @Override
+    public List<CarpetaResponse> buscarCarpetaPorUsuarioFechaYEstado(Long idUsuario, LocalDate firstDate, LocalDate lastDate) {
+        return this.carpetaMapper.toListCarpetaResponse(this.carpetasRepository.buscarCarpetaPorUsuarioFechaYEstado(firstDate, lastDate, idUsuario));
+    }
+
+
 }
