@@ -38,9 +38,15 @@ public class TareasServiceImpl implements TareasService {
     @Override
     public TareaResponse registrar(TareaRequest tareaDto) {
         TareasEntity tareasEntity = this.tareaMapper.tareasEntityMapper(tareaDto);
-        CarpetasEntity carpetasEntity = this.carpetasRepository.findById(tareaDto.idCarpeta()).get();
-        carpetasEntity.setFechaModificacion(LocalDate.now());
-        this.carpetasRepository.save(carpetasEntity);
+
+        if (tareaDto.idCarpeta() != null) {
+            CarpetasEntity carpetasEntity = this.carpetasRepository.findById(tareaDto.idCarpeta()).get();
+            carpetasEntity.setFechaModificacion(LocalDate.now());
+            this.carpetasRepository.save(carpetasEntity);
+        } else {
+            tareasEntity.setIdCarpeta(null);
+        }
+
         return this.tareaMapper.tareaDtoResponse(this.tareasRepository.save(tareasEntity));
     }
 
@@ -113,7 +119,7 @@ public class TareasServiceImpl implements TareasService {
         if (idTarea != null) {
             Optional<TareasEntity> tareasEntity = this.tareasRepository.findById(idTarea);
 
-            if ( comentario != null && !comentario.equalsIgnoreCase("")) {
+            if (comentario != null && !comentario.equalsIgnoreCase("")) {
                 if (tareasEntity.isPresent()) {
                     tareasEntity.get().setComentario(comentario);
                     tareasEntity.get().setEstadoEnum(EstadoEnum.TERMINADO);
@@ -195,5 +201,10 @@ public class TareasServiceImpl implements TareasService {
         } else {
             return this.tareasRepository.contadorPorCarpeta(idCarpeta);
         }
+    }
+
+    @Override
+    public List<TareaResponse> listadoTareasPorUsuarioSinCarpeta(Long idUsuario) {
+        return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoTareasPorUsuarioYSinCarpeta(idUsuario));
     }
 }

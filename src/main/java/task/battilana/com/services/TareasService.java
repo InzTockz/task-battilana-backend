@@ -38,4 +38,7 @@ public interface TareasService {
     //LISTAD TAREAS POR CARPETA
     List<TareaResponse> listadoTareasPorCarpeta(Long idCarpeta, EstadoEnum estado);
     Integer contadorPorCarpetasYEstado(Long idCarpeta, EstadoEnum estado);
+
+    //LISTADO DE TAREAS POR USUARIO Y SIN CARPETA
+    List<TareaResponse> listadoTareasPorUsuarioSinCarpeta(Long idUsuario);
 }

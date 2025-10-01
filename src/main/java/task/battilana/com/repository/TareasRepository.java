@@ -3,6 +3,7 @@ package task.battilana.com.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import task.battilana.com.entity.CarpetasEntity;
 import task.battilana.com.entity.EstadoEnum;
 import task.battilana.com.entity.TareasEntity;
 
@@ -113,4 +114,10 @@ public interface TareasRepository extends JpaRepository<TareasEntity, Long> {
             "INNER JOIN CarpetasEntity C ON C.idCarpeta = T.idCarpeta.idCarpeta " +
             "WHERE T.idCarpeta.idCarpeta =:idCarpeta")
     Integer contadorPorCarpeta(@Param("idCarpeta") Long idCarpeta);
+
+    //LISTADO DE TAREAS SIN CARPETA
+    @Query("SELECT T " +
+            "FROM TareasEntity T " +
+            "WHERE T.usuariosEntity.idUsuarios=:idUsuario AND T.idCarpeta IS NULL")
+    List<TareasEntity> listadoTareasPorUsuarioYSinCarpeta(@Param("idUsuario") Long idUsuario);
 }

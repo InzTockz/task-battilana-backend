@@ -80,11 +80,13 @@ public class UsuarioServiceImpl implements UsuarioService {
                 return new LoginResponse(
                         usuariosEntity.getIdUsuarios(),
                         token,
+                        usuariosEntity.getRoles().name(),
                         "success"
                 );
             } else {
                 return new LoginResponse(
                         null,
+                        "",
                         "",
                         "invalid_credentials"
                 );
@@ -92,6 +94,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         } else {
             return new LoginResponse(
                     null,
+                    "",
                     "",
                     "invalid_credentials"
             );

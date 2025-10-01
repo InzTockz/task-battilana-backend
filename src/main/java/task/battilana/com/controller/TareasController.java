@@ -126,4 +126,10 @@ public class TareasController {
     public ResponseEntity<Integer> contadorPorCarpetaYEstado(@RequestParam("idCarpeta") Long idCarpeta, @RequestParam(value = "estado", required = false) EstadoEnum estado){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorPorCarpetasYEstado(idCarpeta, estado));
     }
+
+    //SECCION TAREAS POR USUARIO Y SIN CARPETA
+    @GetMapping("/listado/usuario/{idUsuario}/sin-carpeta")
+    public ResponseEntity<List<TareaResponse>> listadoTareasPorUsuarioSinCarpeta(@PathVariable Long idUsuario){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoTareasPorUsuarioSinCarpeta(idUsuario));
+    }
 }
