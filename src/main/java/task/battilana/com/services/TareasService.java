@@ -41,4 +41,5 @@ public interface TareasService {
 
     //LISTADO DE TAREAS POR USUARIO Y SIN CARPETA
     List<TareaResponse> listadoTareasPorUsuarioSinCarpeta(Long idUsuario);
+    TareaResponse actualizarCarpetaPorTarea(Long idTarea, Long idCarpeta);
 }

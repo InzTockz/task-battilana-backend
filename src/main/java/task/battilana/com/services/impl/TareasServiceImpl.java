@@ -207,4 +207,13 @@ public class TareasServiceImpl implements TareasService {
     public List<TareaResponse> listadoTareasPorUsuarioSinCarpeta(Long idUsuario) {
         return this.tareaMapper.listadoTareaDto(this.tareasRepository.listadoTareasPorUsuarioYSinCarpeta(idUsuario));
     }
+
+    @Override
+    public TareaResponse actualizarCarpetaPorTarea(Long idTarea, Long idCarpeta) {
+        TareasEntity tareasEntity = this.tareasRepository.findById(idTarea).get();
+        CarpetasEntity carpetasEntity = new CarpetasEntity();
+        carpetasEntity.setIdCarpeta(idCarpeta);
+        tareasEntity.setIdCarpeta(carpetasEntity);
+        return this.tareaMapper.tareaDtoResponse(this.tareasRepository.save(tareasEntity));
+    }
 }

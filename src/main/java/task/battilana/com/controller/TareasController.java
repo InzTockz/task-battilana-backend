@@ -122,7 +122,7 @@ public class TareasController {
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoTareasPorCarpeta(idCarpeta, estado));
     }
 
-    @GetMapping("contador/carpeta")
+    @GetMapping("/contador/carpeta")
     public ResponseEntity<Integer> contadorPorCarpetaYEstado(@RequestParam("idCarpeta") Long idCarpeta, @RequestParam(value = "estado", required = false) EstadoEnum estado){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.contadorPorCarpetasYEstado(idCarpeta, estado));
     }
@@ -131,5 +131,10 @@ public class TareasController {
     @GetMapping("/listado/usuario/{idUsuario}/sin-carpeta")
     public ResponseEntity<List<TareaResponse>> listadoTareasPorUsuarioSinCarpeta(@PathVariable Long idUsuario){
         return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.listadoTareasPorUsuarioSinCarpeta(idUsuario));
+    }
+
+    @PutMapping("/actualizar/tarea/{idTarea}/carpeta/{idCarpeta}")
+    public ResponseEntity<TareaResponse> actualizarCarpetaPorTarea(@PathVariable Long idTarea, @PathVariable Long idCarpeta){
+        return ResponseEntity.status(HttpStatus.OK).body(this.tareasService.actualizarCarpetaPorTarea(idTarea, idCarpeta));
     }
 }
