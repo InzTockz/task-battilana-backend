@@ -54,7 +54,7 @@ public class SecurityConfig {
                                 .requestMatchers("/v1/api/tareas/contador-completado/usuario/**").hasAnyRole("ADMINISTRADOR", "USUARIO")
                                 .requestMatchers("/v1/api/tareas/contador-total/usuario/**").hasAnyRole("ADMINISTRADOR", "USUARIO")
                                 //CARPETAS
-                                .requestMatchers("/v1/api/carpetas/**").permitAll()
+                                .requestMatchers("/v1/api/carpetas/**").hasAnyRole("ADMINISTRADOR", "USUARIO")
                                 .requestMatchers("/v1/api/usuario/login").permitAll()
                                 .requestMatchers("/v1/api/usuario/registrar").permitAll()
                                 .anyRequest().authenticated()
