@@ -4,6 +4,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -34,16 +35,17 @@ public class ScheduledMail {
         this.templateEngine = templateEngine;
     }
 
-    @Scheduled(cron = "0 0 7 * * MON-FRI")
+    @Scheduled(cron = "0 0 7 ? * MON-FRI", zone = "America/Lima")
+//    @Scheduled(cron = "10 * * ? * *", zone = "America/Lima")
     public void enviarMail() {
-        try{
+        try {
             List<UsuariosEntity> usuariosEntity = this.usuarioRepository.findAll();
 
-            if(!usuariosEntity.isEmpty()){
-                for(UsuariosEntity usuarios : usuariosEntity){
+            if (!usuariosEntity.isEmpty()) {
+                for (UsuariosEntity usuarios : usuariosEntity) {
                     List<TareasEntity> tareasEntity = this.tareasRepository.listadoTareasPorUsuario(usuarios.getIdUsuarios());
 
-                    if(!tareasEntity.isEmpty()){
+                    if (!tareasEntity.isEmpty()) {
                         MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
                         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
@@ -58,12 +60,15 @@ public class ScheduledMail {
 
                         helper.setText(html, true);
 
+                        helper.addInline("pendingIcon",
+                                new ClassPathResource("templates/static/image/pending.png"), "image/png");
+
                         this.javaMailSender.send(mimeMessage);
                         logger.info("Correo enviado: {}", new Date());
                     }
                 }
             }
-        }catch (MessagingException ex){
+        } catch (MessagingException ex) {
             System.out.println("Error: " + ex);
         }
     }
