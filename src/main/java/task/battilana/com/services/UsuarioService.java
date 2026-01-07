@@ -12,6 +12,8 @@ public interface UsuarioService {
     List<UsuarioResponse> listado();
     UsuarioResponse registrar (UsuarioRequest usuarioRequest);
     UsuarioResponse buscar(Long idUsuario);
+    UsuarioResponse actualizar(Long idUsuario, UsuarioRequest usuarioRequest);
+    void eliminar(Long idUsuario);
 
     LoginResponse login(LoginRequest loginRequest);
 }

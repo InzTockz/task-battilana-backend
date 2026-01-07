@@ -38,7 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public List<UsuarioResponse> listado() {
-        return this.usuarioMapper.listadoUsuarioMapper(this.usuarioRepository.findAll());
+        return this.usuarioMapper.listadoUsuarioMapper(this.usuarioRepository.findByEstadoTrue());
     }
 
     @Override
@@ -59,6 +59,28 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioResponse buscar(Long idUsuario) {
         return this.usuarioMapper.usuarioDtoMapper(this.usuarioRepository.findById(idUsuario).get());
+    }
+
+    @Override
+    public UsuarioResponse actualizar(Long idUsuario, UsuarioRequest usuarioRequest) {
+        UsuariosEntity usuariosEntity = this.usuarioRepository.findById(idUsuario).get();
+
+        usuariosEntity.setNombres(usuarioRequest.nombres());
+        usuariosEntity.setApellidos(usuarioRequest.apellidos());
+        usuariosEntity.setCorreo(usuarioRequest.correo());
+        if (!usuarioRequest.password().equals("")) {
+            usuariosEntity.setPassword(encoder.encode(usuarioRequest.password()));
+        }
+        usuariosEntity.setRoles(usuarioRequest.roles());
+
+        return this.usuarioMapper.usuarioDtoMapper(this.usuarioRepository.save(usuariosEntity));
+    }
+
+    @Override
+    public void eliminar(Long idUsuario) {
+        UsuariosEntity usuariosEntity = this.usuarioRepository.findById(idUsuario).get();
+        usuariosEntity.setEstado(false);
+        this.usuarioRepository.save(usuariosEntity);
     }
 
     @Override
